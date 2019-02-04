@@ -1,3 +1,4 @@
+
 <html>
 	<head>
 		<meta charset="utf-8"/>
@@ -13,9 +14,9 @@
 				<img src="logo.png" title="Logo" alt="Bach Khoa"/>
 			</div>
 			<div id="hello">
-				<p>TRƯỜNG ĐẠI HỌC BÁCH KHOA THÀNH PHỐ HỒ CHÍ MINH<br/>
-				KHOA ĐIỆN-ĐIỆN TỬ, BỘ MÔN VIỄN THÔNG<br/>				
-				SMART LIGHTING SYSTEM 
+				<p>HO CHI MINH CITY UNIVERSITY OF TECHNOLOGY<br/>
+				TELECOMMUNICATIONS ENGINEERING DEPARTMENT<br/>				
+				SMART 6LOWPAN-GATEWAY WEBSERVER
 				</p>
 			</div>
 		</div>
@@ -25,7 +26,8 @@
 		<?php
 
 
-
+		//	/var/wwww/test/test.php
+		// Enter in browser: http://localhost/test.php
 		$servername = "localhost";
 		$username = "root";
 		$password = "Son100480";
@@ -67,6 +69,9 @@
 				echo "<th>".$column[20]."</th>";
 				echo "<th>".$column[21]."</th>";
 				echo "<th>".$column[22]."</th>";
+				echo "<th>".$column[23]."</th>";
+				echo "<th>".$column[24]."</th>";
+				echo "<th>".$column[25]."</th>";
 
 			echo "</tr></thead>";
 
@@ -75,7 +80,7 @@
 		}
 
 
-		$sql="SELECT id,node_id,ipv6_addr,rf_channel,rssi,lqi,pan_id,tx_power,app_key,next_hop_link_addr,delay,rdr FROM ".$table;
+		$sql="SELECT id,node_id,ipv6_addr,rf_channel,rssi,lqi,pan_id,tx_power,app_key,next_hop_link_addr,delay,rdr, challenge_code, challenge_code_res, authenticated FROM ".$table;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
 			echo  "<tbody>";
@@ -97,6 +102,9 @@
 					echo "<td>".$row['next_hop_link_addr']."</td>";
 					echo "<td>".$row['delay']."</td>";
 					echo "<td>".$row['rdr']."</td>";
+					echo "<td>".$row['challenge_code']."</td>";
+					echo "<td>".$row['challenge_code_res']."</td>";
+					echo "<td>".$row['authenticated']."</td>";
 				echo "</tr>";
 			}
 			echo "</tbody>";
@@ -152,8 +160,12 @@
 				echo "<th>".$column[9]."</th>";
 				echo "<th>".$column[16]."</th>";
 				echo "<th>".$column[17]."</th>";
-				echo "<th>".$column[18]."</th>";
-
+				//echo "<th>".$column[18]."</th>";
+				//echo "<th>".$column[25]."</th>";
+				echo "<th>".$column[26]."</th>";
+				echo "<th>".$column[27]."</th>";
+				echo "<th>".$column[28]."</th>";
+				echo "<th>".$column[29]."</th>";
 			echo "</tr></thead>";
 
 		} else {
@@ -161,7 +173,7 @@
 		}
 
 
-		$sql="SELECT id,node_id,connected,num_req,num_rep,num_timeout,last_cmd,last_seen,num_of_retrans,last_err_code,num_emergency_msg, last_emergency_msg FROM ".$table;
+		$sql="SELECT id,node_id,connected,num_req,num_rep,num_timeout,last_cmd,last_seen,num_of_retrans,last_err_code,num_emergency_msg, temperature, light, pressure, humidity FROM ".$table;
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
 			echo  "<tbody>";
@@ -182,7 +194,11 @@
 					echo "<td>".$row['num_of_retrans']."</td>";
 					echo "<td>".dechex($row['last_err_code'])."</td>";
 					echo "<td>".$row['num_emergency_msg']."</td>";
-					echo "<td>".$row['last_emergency_msg']."</td>";
+					echo "<td>".$row['temperature']."</td>";
+					echo "<td>".$row['light']."</td>";
+					echo "<td>".$row['pressure']."</td>";
+					echo "<td>".$row['humidity']."</td>";
+					//echo "<td>".$row['last_emergency_msg']."</td>";
 				echo "</tr>";
 			}
 			echo "</tbody>";
